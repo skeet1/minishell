@@ -1,0 +1,66 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/06 19:55:04 by mkarim            #+#    #+#             */
+/*   Updated: 2022/07/02 18:18:14 by mkarim           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "parse.h"
+
+size_t	ft_strlen(char *s)
+{
+	size_t		i;
+
+	i = 0;
+	if (s)
+	{
+		while (s[i])
+			i++;
+	}
+	return (i);
+}
+
+size_t	ft_strlcpy(char *dst, char *src, size_t size)
+{
+	size_t	i;
+
+	i = 0;
+	if (size == 0)
+		return (ft_strlen(src));
+	while (src[i] && i < size - 1)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (ft_strlen(src));
+}
+
+char	*ft_substr(char *s, unsigned int start, size_t len)
+{
+	size_t	i;
+	size_t	j;
+	size_t	len_s;
+	char	*str;
+
+	if (!s)
+		return (NULL);
+	len_s = ft_strlen(s);
+	if (len > len_s)
+		len = len_s;
+	str = (char *)malloc(sizeof(*s) * (len + 1));
+	if (!str)
+		return (NULL);
+	i = -1;
+	j = 0;
+	while (s[++i])
+		if (i >= start && j < len)
+			str[j++] = s[i];
+	str[j] = '\0';
+	return (str);
+}
