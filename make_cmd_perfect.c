@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 15:33:49 by mkarim            #+#    #+#             */
-/*   Updated: 2022/07/03 19:11:54 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/03 19:13:51 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ void    make_cmd_perfect(t_data *data, char *s)
 	int		len;
 
 	len = right_len(s);
-	printf("len is %d\n", len);
+	// printf("len is %d\n", len);
 	data->cmd_line = put_cmd(s, len);
-	printf("%s\n", data->cmd_line);
+	// printf("%s\n", data->cmd_line);
 }
