@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:55:04 by mkarim            #+#    #+#             */
-/*   Updated: 2022/07/02 18:32:06 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/03 09:00:52 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,18 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 			str[j++] = s[i];
 	str[j] = '\0';
 	return (str);
+}
+
+int	ft_strcmp(char *s1, char *s2)
+{
+	size_t	i;
+
+	i = 0;
+	while (s1[i] != '\0' || s2[i] != '\0')
+	{
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i ++;
+	}
+	return (0);
 }
