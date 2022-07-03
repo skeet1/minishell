@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 15:33:49 by mkarim            #+#    #+#             */
-/*   Updated: 2022/07/03 17:47:37 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/03 19:11:54 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,36 @@
 
 int	is_special(char c)
 {
-	if (c == '|' || c == '<' || c == '>' || c == '\'' || c == '"')
+	if (c == '|' || c == '<' || c == '>')
 		return (1);
 	return (0);
+}
+
+int	check_space(char *s, int i)
+{
+	int 	len;
+	int		ret;
+
+	ret = 0;
+	len = ft_strlen(s);
+	if (i && i < len - 1)
+	{
+		if (s[i - 1] != ' ')
+			ret++;
+		if (s[i + 1] != ' ')
+			ret++;
+	}
+	else if (i)
+	{
+		if (s[i - 1] != ' ')
+			ret++;
+	}
+	else
+	{
+		if (s[i + 1] != ' ')
+			ret++;
+	}
+	return (ret);
 }
 
 int	right_len(char *s)
@@ -31,32 +58,22 @@ int	right_len(char *s)
 	quotes[1] = 1;
 	while (s[i])
 	{
-		if (s[i] == '\'')
-			quotes[0]++;
-		else if (s[i] == '"')
-			quotes[1]++;
-		if (quotes[0] % 2 == 0 || quotes[1] % 2 == 0)
-			len++;
-		else if (is_special(s[i]))
+		if (is_special(s[i]))
 		{
-			while (is_special(s[i]))
-			{
-				len++;
-				i++;
-			}
-			len += 3;
+			len += check_space(s, i);
 		}
-		else if (!ft_isspace(s[i]))
-			len++;
-		else
-		{
-			len++;
-			while (ft_isspace(s[i]) && ft_isspace(s[i - 1]))
-				i++;
-		}
+		len++;
 		i++;
 	}
 	return (len);
+}
+
+int	space_before(char *s, int i)
+{
+	if (i)
+		if (!ft_isspace(s[i - 1]))
+			return (1);
+	return (0);
 }
 
 char	*put_cmd(char *s, int len)
@@ -75,32 +92,39 @@ char	*put_cmd(char *s, int len)
 	quotes[1] = 1;
 	while (s[i])
 	{
-		// printf("now is : %c\n", s[i]);
-		if (s[i] == '\'')
-			quotes[0]++;
-		else if (s[i] == '"')
-			quotes[1]++;
-		if (quotes[0] % 2 == 0 || quotes[1] % 2 == 0)
-			cmd[j++] = s[i];
-		else if (is_special(s[i]))
+		if (i)
 		{
-			cmd[j++] = ' ';
-			while (!ft_isspace(s[i]))
+			if (ft_isspace(s[i]) && ft_isspace(s[i - 1]))
 			{
-				cmd[j++] = s[i];
 				i++;
+				continue;
 			}
-			cmd[j++] = ' ';
 		}
-		else if (!ft_isspace(s[i]))
-			cmd[j++] = s[i];
-		else
+		if (is_special(s[i]))
 		{
-			// cmd[j++] = ' ';
-			while (ft_isspace(s[i]) && ft_isspace(s[i - 1]))
-				i++;
-			cmd[j++] = s[i];
+			if (check_space(s, i) == 2)
+			{
+				cmd[j++] = ' ';
+				cmd[j++] = s[i];
+				cmd[j++] = ' ';
+			}
+			else if (check_space(s, i) == 1)
+			{
+				if (space_before(s, i))
+				{
+					cmd[j++] = ' ';
+					cmd[j++] = s[i];
+				}
+				else {
+					cmd[j++] = s[i];
+					cmd[j++] = ' ';
+				}
+			}
+			else
+				cmd[j++] = s[i];
 		}
+		else
+			cmd[j++] = s[i];
 		i++;
 	}
 	cmd[j] = '\0';

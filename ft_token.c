@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 17:42:10 by mkarim            #+#    #+#             */
-/*   Updated: 2022/07/03 18:47:30 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/03 19:12:27 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ void	ft_token_side(t_data *data, char *s)
 		}
 		j++;
 	}
-	printf("nodes is %d\n", node);
 	while (token)
 	{
 		printf("type is %d\t\t value is %s\n", token->type, token->value);
@@ -128,5 +127,5 @@ void	ft_token(t_data *data, char *s)
 	data->cmd_sides = ft_split(s, '|');
 	make_cmd_perfect(data, s);
 	// ft_check_syntax(data);
-	ft_token_side(data, s);
+	ft_token_side(data, data->cmd_line);
 }
