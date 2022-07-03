@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 18:56:03 by mkarim            #+#    #+#             */
-/*   Updated: 2022/07/02 18:29:53 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/03 08:29:18 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ typedef struct s_variables
 
 typedef struct s_data {
 	char	*cmd_line;
-	int		num_cmd;
+	int		side;
+	char	**cmd_sides;
 }		t_data;
 
 typedef	struct s_token {
@@ -48,7 +49,6 @@ typedef	struct s_token {
 size_t	ft_strlen(char *s);
 void	ft_putstr(char *s);
 void	ft_putendl(char *s);
-char	**ft_split(char const *s, char c);
 
 typedef struct s_cmdl {
 	char	*cmd;
@@ -65,5 +65,8 @@ int	    check_err_pipe(char *s);
 char	*ft_substr(char *s, unsigned int start, size_t len);
 char	*ft_strtrim(char *s1, char *set);
 size_t	ft_strlcpy(char *dst, char *src, size_t size);
+int	ft_isspace(int c);
+void	ft_token(t_data *data, char *s);
+char	**ft_split(char *s, char c);
 
 #endif
