@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 17:42:10 by mkarim            #+#    #+#             */
-/*   Updated: 2022/07/03 09:24:29 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/03 09:32:30 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,30 +52,33 @@ t_token	*ft_new_node(char *value)
 	t_token *new;
 
 	new = (t_token *)malloc(sizeof(t_token));
+	if (!new)
+		return (new);
 	new->value = value;
 	new->type = ft_token_type(value);
 	new->next = NULL;
 	return (new);
 }
 
-void	ft_add_back(t_token **tok, char *value)
+void	ft_add_back(t_token **token, char *value)
 {
+	t_token *last;
 	t_token	*new;
-	t_token *token;
 
-	token = *tok;
+	last = *token;
 	new = ft_new_node(value);
-	printf("type is %d\t, value is : %s\n", new->type, new->value);
-	if (!token)
-		token = new;
-	else
+	if (new == NULL)
+		return ;
+	if (last == NULL)
 	{
-		while (token->next)
-		{
-			token = token->next;
-		}
-		token->next = new;
+		*token = new;
+		return ;
 	}
+	while (last->next != NULL)
+	{
+		last = last->next;
+	}
+	last->next = new;
 }
 
 void	ft_token_side(t_data *data, char *s)
@@ -99,12 +102,15 @@ void	ft_token_side(t_data *data, char *s)
 		j++;
 	}
 	// printf("hi\n");
+	int size = 0;
 	while (token)
 	{
-		printf("hi2578\n");
+		// printf("hi2578\n");
 		printf("type is %d\t\t value is %s\n", token->type, token->value);
 		token = token->next;
+		// size++;
 	}
+	// printf("%d\n", size);
 }
 
 void	ft_token(t_data *data, char *s)
