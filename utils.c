@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:55:04 by mkarim            #+#    #+#             */
-/*   Updated: 2022/07/03 09:00:52 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/03 15:56:10 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,12 @@ int	ft_strcmp(char *s1, char *s2)
 			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 		i ++;
 	}
+	return (0);
+}
+
+int	ft_isalnum(int c)
+{
+	if ((c >= 48 && c <= 57) || (c >= 65 && c <= 90) || (c >= 90 && c <= 122))
+		return (1);
 	return (0);
 }

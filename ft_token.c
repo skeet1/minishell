@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 17:42:10 by mkarim            #+#    #+#             */
-/*   Updated: 2022/07/03 13:20:09 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/03 18:47:30 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,21 +93,21 @@ void	ft_token_side(t_data *data, char *s)
 	token = NULL;
 	quotes[0] = 1;
 	quotes[1] = 1;
+	int node= 0;
 	while (s[j])
 	{
 		if (s[j] == '\'')
 			quotes[0]++;
 		else if (s[j] == '"')
 			quotes[1]++;
-		if ((ft_isspace(s[j]) || !s[j + 1] || s[j] == '|') && (quotes[0] % 2 && quotes[1] % 2))
+		if ((ft_isspace(s[j]) || !s[j + 1]) && (quotes[0] % 2 && quotes[1] % 2))
 		{
 			ft_add_back(&token, ft_substr(s, start, j - start + !s[j  + 1]));
-			if (s[j] == '|')
-				ft_add_back(&token, "|");
 			start = j + 1;
 		}
 		j++;
 	}
+	printf("nodes is %d\n", node);
 	while (token)
 	{
 		printf("type is %d\t\t value is %s\n", token->type, token->value);
@@ -126,6 +126,7 @@ void	ft_token(t_data *data, char *s)
 	start = i;
 	ft_num_cmd_side(data, s);
 	data->cmd_sides = ft_split(s, '|');
+	make_cmd_perfect(data, s);
 	// ft_check_syntax(data);
 	ft_token_side(data, s);
 }
