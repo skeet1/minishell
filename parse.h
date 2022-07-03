@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 18:56:03 by mkarim            #+#    #+#             */
-/*   Updated: 2022/07/03 09:01:08 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/03 10:46:54 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ typedef enum e_token {
 	D_QUOTE,
 	RED_IN,
 	RED_OUT,
-	D_RED_IN,
-	D_RED_OUT,
+	RED_IN_APP,
+	RED_OUT_APP,
 	PIPE,
 	WORD
 }		t_e_token;
@@ -81,5 +81,6 @@ int	ft_isspace(int c);
 void	ft_token(t_data *data, char *s);
 char	**ft_split(char *s, char c);
 int	ft_strcmp(char *s1, char *s2);
+void    ft_check_syntax(t_data *data);
 
 #endif

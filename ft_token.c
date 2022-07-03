@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 17:42:10 by mkarim            #+#    #+#             */
-/*   Updated: 2022/07/03 09:32:30 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/03 13:20:09 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ int	ft_token_type(char *value)
 	else if (!ft_strcmp(value, ">"))
 		return (RED_OUT);
 	else if (!ft_strcmp(value, "<<"))
-		return (D_RED_IN);
+		return (RED_IN_APP);
 	else if (!ft_strcmp(value, ">>"))
-		return (D_RED_OUT);
+		return (RED_OUT_APP);
 	else if (!ft_strcmp(value, "|"))
 		return (PIPE);
 	return (WORD);
@@ -83,34 +83,36 @@ void	ft_add_back(t_token **token, char *value)
 
 void	ft_token_side(t_data *data, char *s)
 {
-	int		i;
 	int		j;
 	int		start;
+	int		quotes[2];
 	t_token	*token;
 
-	i = 0;
 	j = 0;
 	start = 0;
 	token = NULL;
+	quotes[0] = 1;
+	quotes[1] = 1;
 	while (s[j])
 	{
-		if (ft_isspace(s[j]) || !s[j + 1])
+		if (s[j] == '\'')
+			quotes[0]++;
+		else if (s[j] == '"')
+			quotes[1]++;
+		if ((ft_isspace(s[j]) || !s[j + 1] || s[j] == '|') && (quotes[0] % 2 && quotes[1] % 2))
 		{
 			ft_add_back(&token, ft_substr(s, start, j - start + !s[j  + 1]));
+			if (s[j] == '|')
+				ft_add_back(&token, "|");
 			start = j + 1;
 		}
 		j++;
 	}
-	// printf("hi\n");
-	int size = 0;
 	while (token)
 	{
-		// printf("hi2578\n");
 		printf("type is %d\t\t value is %s\n", token->type, token->value);
 		token = token->next;
-		// size++;
 	}
-	// printf("%d\n", size);
 }
 
 void	ft_token(t_data *data, char *s)
@@ -124,6 +126,6 @@ void	ft_token(t_data *data, char *s)
 	start = i;
 	ft_num_cmd_side(data, s);
 	data->cmd_sides = ft_split(s, '|');
+	// ft_check_syntax(data);
 	ft_token_side(data, s);
-	// printf("sides : %d\n", data->side);
 }
