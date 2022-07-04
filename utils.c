@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:55:04 by mkarim            #+#    #+#             */
-/*   Updated: 2022/07/03 15:56:10 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/04 09:41:39 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,16 @@ size_t	ft_strlcpy(char *dst, char *src, size_t size)
 	}
 	dst[i] = '\0';
 	return (ft_strlen(src));
+}
+
+void	ft_putendl(char *s)
+{
+	int		i;
+
+	i = 0;
+	while (s[i])
+		write(1, &s[i++], 1);
+	write(1, "\n", 1);
 }
 
 int	ft_isspace(int c)
