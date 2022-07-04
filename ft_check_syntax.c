@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 09:34:37 by mkarim            #+#    #+#             */
-/*   Updated: 2022/07/04 09:56:50 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/04 10:32:06 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	check_pipes(char *s)
 
 	i = 0;
 	if (s[0] == '|' || s[ft_strlen(s) - 1] == '|')
-		return (ft_putendl("pipe error"), 1);
+		return (ft_putstr(SNT_ERR), ft_putendl("|'"), 1);
 	while (s[i])
 	{
 		pipe = 0;
@@ -55,9 +55,15 @@ int	check_pipes(char *s)
 	return (0);
 }
 
-int	ft_check_syntax(t_data *data)
+int	check_red(char *s)
 {
-	if (check_quotes(data->cmd_line) || check_pipes(data->cmd_line))
+	return (0);
+}
+
+int	ft_check_syntax(char *s)
+{
+	if (check_quotes(s) || check_pipes(s)
+		|| check_red(s))
 		return (1);
 	return (0);
 }

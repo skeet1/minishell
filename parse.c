@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 11:47:50 by mkarim            #+#    #+#             */
-/*   Updated: 2022/07/04 09:49:48 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/04 10:20:21 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	main(int argc, char **argv)
 		{
 			data.cmd_line = readline(PROMPT);
 			add_history(data.cmd_line);
-			ft_token(&data, ft_strtrim(data.cmd_line, " "));
+			data.cmd_line = ft_strtrim(data.cmd_line, " ");
+			ft_token(&data, data.cmd_line);
 		}
 	}
 }

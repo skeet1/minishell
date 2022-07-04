@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 18:56:03 by mkarim            #+#    #+#             */
-/*   Updated: 2022/07/04 09:51:23 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/04 10:25:07 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,9 @@ int	ft_isspace(int c);
 void	ft_token(t_data *data, char *s);
 char	**ft_split(char *s, char c);
 int	ft_strcmp(char *s1, char *s2);
-int    ft_check_syntax(t_data *data);
+int    ft_check_syntax(char *s);
 void    make_cmd_perfect(t_data *data, char *s);
 int	ft_isalnum(int c);
+char	*ft_strcat(char *dest, char *src);
 
 #endif
