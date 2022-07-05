@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 17:42:10 by mkarim            #+#    #+#             */
-/*   Updated: 2022/07/04 10:15:22 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/05 10:53:56 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	ft_add_back(t_token **token, char *value)
 	t_token	*new;
 
 	last = *token;
-	new = ft_new_node(value);
+	new = ft_new_node(ft_strtrim(value, " "));
 	if (new == NULL)
 		return ;
 	if (last == NULL)
@@ -91,8 +91,8 @@ void	ft_token_side(t_data *data, char *s)
 	j = 0;
 	start = 0;
 	token = NULL;
-	quotes[0] = 1;
-	quotes[1] = 1;
+	quotes[0] = 0;
+	quotes[1] = 0;
 	int node= 0;
 	while (s[j])
 	{
@@ -100,12 +100,33 @@ void	ft_token_side(t_data *data, char *s)
 			quotes[0]++;
 		else if (s[j] == '"')
 			quotes[1]++;
-		if ((ft_isspace(s[j]) || !s[j + 1]) && (quotes[0] % 2 && quotes[1] % 2))
+		if (quotes[1] % 2 || quotes[0] % 2)
 		{
-			ft_add_back(&token, ft_substr(s, start, j - start + !s[j  + 1]));
-			start = j + 1;
+			j++;
+			continue;
 		}
-		j++;
+		if (!ft_isspace(s[j]) && !is_special(s[j]))
+		{
+			while (s[j] && !ft_isspace(s[j]) && !is_special(s[j]))
+				j++;
+			ft_add_back(&token, ft_substr(s, start, j - start + !s[j  + 1]));
+			start = j;
+		}
+		while (s[j] && ft_isspace(s[j]))
+			j++;
+		if (is_special(s[j]))
+		{
+			while (s[j] && is_special(s[j]))
+				j++;
+			ft_add_back(&token, ft_substr(s, start, j - start + !s[j  + 1]));
+			start = j;
+		}
+		// if ((ft_isspace(s[j]) || !s[j + 1]) && (quotes[0] % 2 && quotes[1] % 2))
+		// {
+		// 	ft_add_back(&token, ft_substr(s, start, j - start + !s[j  + 1]));
+		// 	start = j + 1;
+		// }
+		// j++;
 	}
 	while (token)
 	{
@@ -125,8 +146,8 @@ void	ft_token(t_data *data, char *s)
 	start = i;
 	ft_num_cmd_side(data, s);
 	data->cmd_sides = ft_split(s, '|');
-	make_cmd_perfect(data, s);
-	if (ft_check_syntax(data->cmd_line))
-		return ;
+	// make_cmd_perfect(data, s);
+	// if (ft_check_syntax(data->cmd_line))
+	// 	return ;
 	ft_token_side(data, data->cmd_line);
 }
