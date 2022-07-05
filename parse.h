@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 18:56:03 by mkarim            #+#    #+#             */
-/*   Updated: 2022/07/05 12:25:01 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/05 15:05:53 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,6 @@ int    ft_check_syntax(char *s);
 int	ft_isalnum(int c);
 char	*ft_strcat(char *dest, char *src);
 int	is_special(char c);
+void	remove_quotes(t_token *token);
 
 #endif
