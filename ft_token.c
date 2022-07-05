@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 17:42:10 by mkarim            #+#    #+#             */
-/*   Updated: 2022/07/05 10:53:56 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/05 11:37:06 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void	ft_token_side(t_data *data, char *s)
 		{
 			while (s[j] && is_special(s[j]))
 				j++;
-			ft_add_back(&token, ft_substr(s, start, j - start + !s[j  + 1]));
+			ft_add_back(&token, ft_substr(s, start, j - start));
 			start = j;
 		}
 		// if ((ft_isspace(s[j]) || !s[j + 1]) && (quotes[0] % 2 && quotes[1] % 2))
@@ -147,7 +147,7 @@ void	ft_token(t_data *data, char *s)
 	ft_num_cmd_side(data, s);
 	data->cmd_sides = ft_split(s, '|');
 	// make_cmd_perfect(data, s);
-	// if (ft_check_syntax(data->cmd_line))
-	// 	return ;
+	if (ft_check_syntax(data->cmd_line))
+		return ;
 	ft_token_side(data, data->cmd_line);
 }
