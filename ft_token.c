@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 17:42:10 by mkarim            #+#    #+#             */
-/*   Updated: 2022/07/05 16:17:58 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/05 16:23:38 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ void	print_token(t_token *token)
 		token = token->next;
 	}
 }
-
-// hdfh
 
 t_files	*ft_new_node_files(int type, char *name)
 {
@@ -210,10 +208,8 @@ void	ft_token_side(t_data *data, char *s)
 		// j++;
 	}
 	remove_quotes(token);
-	t_token *tok;
-	tok = token;
 	print_token(token);
-	list_files(tok);
+	list_files(token);
 }
 
 void	ft_token(t_data *data, char *s)
