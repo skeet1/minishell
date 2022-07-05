@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 17:42:10 by mkarim            #+#    #+#             */
-/*   Updated: 2022/07/05 11:37:06 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/05 11:44:13 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,9 @@ void	ft_token_side(t_data *data, char *s)
 	int node= 0;
 	while (s[j])
 	{
-		if (s[j] == '\'')
+		if (s[j] == '\'' && quotes[1] % 2 == 0)
 			quotes[0]++;
-		else if (s[j] == '"')
+		else if (s[j] == '"' && quotes[0] % 2 == 0)
 			quotes[1]++;
 		if (quotes[1] % 2 || quotes[0] % 2)
 		{
