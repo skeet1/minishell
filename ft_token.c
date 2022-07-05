@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 17:42:10 by mkarim            #+#    #+#             */
-/*   Updated: 2022/07/05 11:44:13 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/05 16:17:58 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,76 @@ int	ft_token_type(char *value)
 		return (PIPE);
 	return (WORD);
 }
+
+void	print_token(t_token *token)
+{
+	while (token)
+	{
+		printf("type is %d\t\t value is %s\n", token->type, token->value);
+		token = token->next;
+	}
+}
+
+// hdfh
+
+t_files	*ft_new_node_files(int type, char *name)
+{
+	t_files *new;
+
+	new = (t_files*)malloc(sizeof(t_files));
+	if (!new)
+		return (new);
+	new->name = name;
+	new->type = type;
+	new->next = NULL;
+	return (new);
+}
+
+void	ft_add_back_file(t_files **file, int type, char *name)
+{
+	t_files	*new;
+	t_files *last;
+
+	last = *file;
+	new = ft_new_node_files(type, name);
+	if (new == NULL)
+		return ;
+	if (last == NULL)
+	{
+		*file = new;
+		return ;
+	}
+	while (last->next != NULL)
+	{
+		last = last->next;
+	}
+	last->next = new;
+}
+
+void	list_files(t_token *token)
+{
+	t_files	*file;
+	t_token *tmp;
+
+	file = NULL;
+	tmp = token;
+	// printf("%s\n", tmp->value);
+	while (tmp->next)
+	{
+		if (tmp->type >= 2 && tmp->type <= 5)
+		{
+			ft_add_back_file(&file, tmp->type, tmp->next->value);
+		}
+		tmp = tmp->next;
+	}
+	while (file)
+	{
+		printf("name of file is : %s -- type is : %d\n", file->name, file->type);
+		file = file->next;
+	}
+}
+
+// dffdjfs
 
 t_token	*ft_new_node(char *value)
 {
@@ -107,8 +177,19 @@ void	ft_token_side(t_data *data, char *s)
 		}
 		if (!ft_isspace(s[j]) && !is_special(s[j]))
 		{
-			while (s[j] && !ft_isspace(s[j]) && !is_special(s[j]))
+			while ((s[j] && !ft_isspace(s[j]) && !is_special(s[j])) || (s[j] && (quotes[1] % 2 || quotes[0] % 2)))
+			{
+				if (s[j] == '\'' && quotes[1] % 2 == 0)
+					quotes[0]++;
+				else if (s[j] == '"' && quotes[0] % 2 == 0)
+					quotes[1]++;
+				if (quotes[1] % 2 || quotes[0] % 2)
+				{
+					j++;
+					continue;
+				}
 				j++;
+			}
 			ft_add_back(&token, ft_substr(s, start, j - start + !s[j  + 1]));
 			start = j;
 		}
@@ -128,11 +209,11 @@ void	ft_token_side(t_data *data, char *s)
 		// }
 		// j++;
 	}
-	while (token)
-	{
-		printf("type is %d\t\t value is %s\n", token->type, token->value);
-		token = token->next;
-	}
+	remove_quotes(token);
+	t_token *tok;
+	tok = token;
+	print_token(token);
+	list_files(tok);
 }
 
 void	ft_token(t_data *data, char *s)

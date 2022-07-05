@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 18:56:03 by mkarim            #+#    #+#             */
-/*   Updated: 2022/07/05 10:55:07 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/05 15:05:53 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,12 @@ typedef	struct s_token {
 	struct	s_token *next;
 }				t_token;
 
+typedef struct	s_files {
+	int	type;
+	char *name;
+	struct s_files *next;
+}			t_files;
+
 size_t	ft_strlen(char *s);
 void	ft_putstr(char *s);
 void	ft_putendl(char *s);
@@ -86,5 +92,6 @@ int    ft_check_syntax(char *s);
 int	ft_isalnum(int c);
 char	*ft_strcat(char *dest, char *src);
 int	is_special(char c);
+void	remove_quotes(t_token *token);
 
 #endif
