@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 09:34:37 by mkarim            #+#    #+#             */
-/*   Updated: 2022/07/05 11:43:46 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/05 13:12:40 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,11 @@ int	check_pipes(char *s)
 
 int	check_red(char *s)
 {
+	int	len;
+
+	len = ft_strlen(s);
+	if (s[len - 1] == '>' || s[len + 1] == '<')
+		return(ft_putstr(SNT_ERR), ft_putendl("newline'"), 1);
 	return (0);
 }
 
