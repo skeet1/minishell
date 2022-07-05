@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 17:42:10 by mkarim            #+#    #+#             */
-/*   Updated: 2022/07/05 16:23:38 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/05 16:43:25 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,18 @@ void	ft_add_back_file(t_files **file, int type, char *name)
 	last->next = new;
 }
 
+void	add_file_type(t_token *token)
+{
+	while (token->next)
+	{
+		if (token->type >= 2 && token->type <= 5)
+		{
+			token->next->type = FILEE;
+		}
+		token = token->next;
+	}
+}
+
 void	list_files(t_token *token)
 {
 	t_files	*file;
@@ -97,7 +109,6 @@ void	list_files(t_token *token)
 
 	file = NULL;
 	tmp = token;
-	// printf("%s\n", tmp->value);
 	while (tmp->next)
 	{
 		if (tmp->type >= 2 && tmp->type <= 5)
@@ -207,6 +218,7 @@ void	ft_token_side(t_data *data, char *s)
 		// }
 		// j++;
 	}
+	add_file_type(token);
 	remove_quotes(token);
 	print_token(token);
 	list_files(token);

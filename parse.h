@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 18:56:03 by mkarim            #+#    #+#             */
-/*   Updated: 2022/07/05 15:05:53 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/05 16:40:58 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef enum e_token {
 	RED_IN_APP,
 	RED_OUT_APP,
 	PIPE,
+	FILEE,
 	WORD
 }		t_e_token;
 
