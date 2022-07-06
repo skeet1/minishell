@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 17:42:10 by mkarim            #+#    #+#             */
-/*   Updated: 2022/07/06 09:04:13 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/06 09:14:26 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,11 +133,9 @@ t_token	*ft_new_node(char *value)
 	new = (t_token *)malloc(sizeof(t_token));
 	if (!new)
 		return (new);
-	printf("%s\n", value);
 	new->dbl_qt = 0;
 	if (value[0] == '"')
 		new->dbl_qt = 1;
-	printf("%d\n", new->dbl_qt);
 	new->value = value;
 	new->type = ft_token_type(value);
 	new->next = NULL;
@@ -173,16 +171,14 @@ void	incr_quotes(char c, int *a, int *b)
 		(*b)++;
 }
 
-void	ft_token_side(t_data *data, char *s)
+void	ft_token_side(t_token *token, t_data *data, char *s)
 {
 	int		j;
 	int		start;
 	int		quotes[2];
-	t_token	*token;
 
 	j = 0;
 	start = 0;
-	token = NULL;
 	quotes[0] = 0;
 	quotes[1] = 0;
 	int node= 0;
@@ -229,11 +225,10 @@ void	ft_token_side(t_data *data, char *s)
 	list_files(token);
 }
 
-void	ft_token(t_data *data, char *s)
+void	ft_token(t_token *token, t_data *data, char *s)
 {
 	int     i;
 	int		start;
-	int		token = 0;
 	int		side = 1;
 
 	i = 0;
@@ -243,5 +238,5 @@ void	ft_token(t_data *data, char *s)
 	// make_cmd_perfect(data, s);
 	if (ft_check_syntax(data->cmd_line))
 		return ;
-	ft_token_side(data, data->cmd_line);
+	ft_token_side(token, data, data->cmd_line);
 }
