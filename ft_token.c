@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 17:42:10 by mkarim            #+#    #+#             */
-/*   Updated: 2022/07/06 07:55:28 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/06 08:09:23 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,14 @@ void	ft_add_back(t_token **token, char *value)
 	last->next = new;
 }
 
+void	incr_quotes(char c, int *a, int *b)
+{
+	if (c == '\'' && (*b) % 2 == 0)
+		(*a)++;
+	else if (c == '"' && (*a) % 2 == 0)
+		(*b)++;
+}
+
 void	ft_token_side(t_data *data, char *s)
 {
 	int		j;
@@ -175,10 +183,7 @@ void	ft_token_side(t_data *data, char *s)
 	int node= 0;
 	while (s[j])
 	{
-		if (s[j] == '\'' && quotes[1] % 2 == 0)
-			quotes[0]++;
-		else if (s[j] == '"' && quotes[0] % 2 == 0)
-			quotes[1]++;
+		incr_quotes(s[j], &quotes[0], &quotes[1]);
 		if (quotes[1] % 2 || quotes[0] % 2)
 		{
 			j++;
@@ -186,10 +191,7 @@ void	ft_token_side(t_data *data, char *s)
 		}
 		if (!ft_isspace(s[j]) && !is_special(s[j]))
 		{
-			if (s[j] == '\'' && quotes[1] % 2 == 0)
-				quotes[0]++;
-			else if (s[j] == '"' && quotes[0] % 2 == 0)
-				quotes[1]++;
+			incr_quotes(s[j], &quotes[0], &quotes[1]);
 			while ((s[j] && !ft_isspace(s[j]) && !is_special(s[j])) || (s[j] && (quotes[1] % 2 || quotes[0] % 2)))
 			{
 				if (s[j] == '\'' && quotes[1] % 2 == 0)

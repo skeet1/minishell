@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:55:04 by mkarim            #+#    #+#             */
-/*   Updated: 2022/07/04 10:31:52 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/06 08:11:38 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,13 @@ void	ft_putendl(char *s)
 	while (s[i])
 		write(1, &s[i++], 1);
 	write(1, "\n", 1);
+}
+
+int	is_special(char c)
+{
+	if (c == '|' || c == '<' || c == '>')
+			return (1);
+	return (0);
 }
 
 int	ft_isspace(int c)
