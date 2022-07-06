@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 17:42:10 by mkarim            #+#    #+#             */
-/*   Updated: 2022/07/06 08:09:23 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/06 09:04:13 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,11 @@ t_token	*ft_new_node(char *value)
 	new = (t_token *)malloc(sizeof(t_token));
 	if (!new)
 		return (new);
+	printf("%s\n", value);
+	new->dbl_qt = 0;
+	if (value[0] == '"')
+		new->dbl_qt = 1;
+	printf("%d\n", new->dbl_qt);
 	new->value = value;
 	new->type = ft_token_type(value);
 	new->next = NULL;

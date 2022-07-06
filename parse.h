@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 18:56:03 by mkarim            #+#    #+#             */
-/*   Updated: 2022/07/05 16:40:58 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/06 09:02:47 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_data {
 typedef	struct s_token {
 	int		type;
 	char	*value;
+	int		dbl_qt;
 	struct	s_token *next;
 }				t_token;
 
