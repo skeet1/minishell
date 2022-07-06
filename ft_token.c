@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 17:42:10 by mkarim            #+#    #+#             */
-/*   Updated: 2022/07/05 16:43:25 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/06 07:55:28 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,10 @@ void	ft_token_side(t_data *data, char *s)
 		}
 		if (!ft_isspace(s[j]) && !is_special(s[j]))
 		{
+			if (s[j] == '\'' && quotes[1] % 2 == 0)
+				quotes[0]++;
+			else if (s[j] == '"' && quotes[0] % 2 == 0)
+				quotes[1]++;
 			while ((s[j] && !ft_isspace(s[j]) && !is_special(s[j])) || (s[j] && (quotes[1] % 2 || quotes[0] % 2)))
 			{
 				if (s[j] == '\'' && quotes[1] % 2 == 0)
@@ -211,12 +215,6 @@ void	ft_token_side(t_data *data, char *s)
 			ft_add_back(&token, ft_substr(s, start, j - start));
 			start = j;
 		}
-		// if ((ft_isspace(s[j]) || !s[j + 1]) && (quotes[0] % 2 && quotes[1] % 2))
-		// {
-		// 	ft_add_back(&token, ft_substr(s, start, j - start + !s[j  + 1]));
-		// 	start = j + 1;
-		// }
-		// j++;
 	}
 	add_file_type(token);
 	remove_quotes(token);
