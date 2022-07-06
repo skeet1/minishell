@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 17:42:10 by mkarim            #+#    #+#             */
-/*   Updated: 2022/07/06 09:14:26 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/06 11:35:58 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,7 @@ void	incr_quotes(char c, int *a, int *b)
 		(*b)++;
 }
 
-void	ft_token_side(t_token *token, t_data *data, char *s)
+t_token *ft_token_side(t_token *token, t_data *data, char *s)
 {
 	int		j;
 	int		start;
@@ -221,11 +221,11 @@ void	ft_token_side(t_token *token, t_data *data, char *s)
 	}
 	add_file_type(token);
 	remove_quotes(token);
-	print_token(token);
 	list_files(token);
+	return (token);
 }
 
-void	ft_token(t_token *token, t_data *data, char *s)
+t_token	*ft_token(t_token *token, t_data *data, char *s)
 {
 	int     i;
 	int		start;
@@ -237,6 +237,6 @@ void	ft_token(t_token *token, t_data *data, char *s)
 	data->cmd_sides = ft_split(s, '|');
 	// make_cmd_perfect(data, s);
 	if (ft_check_syntax(data->cmd_line))
-		return ;
-	ft_token_side(token, data, data->cmd_line);
+		return (0);
+	return (ft_token_side(token, data, data->cmd_line));
 }

@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:55:04 by mkarim            #+#    #+#             */
-/*   Updated: 2022/07/06 08:11:38 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/06 11:28:27 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,23 +41,35 @@ size_t	ft_strlcpy(char *dst, char *src, size_t size)
 	return (ft_strlen(src));
 }
 
-void	ft_putstr(char *s)
+void	ft_putstr_fd(char *s, int fd)
 {
 	int		i;
 
 	i = 0;
-	while (s[i])
-		write(1, &s[i++], 1);
+	if (s)
+	{
+		while (s[i])
+		{
+			write(fd, &s[i], 1);
+			i++;
+		}
+	}
 }
 
-void	ft_putendl(char *s)
+void	ft_putendl_fd(char *s, int fd)
 {
 	int		i;
 
 	i = 0;
-	while (s[i])
-		write(1, &s[i++], 1);
-	write(1, "\n", 1);
+	if (s)
+	{
+		while (s[i])
+		{
+			write(fd, &s[i], 1);
+			i++;
+		}
+		write(fd, "\n", 1);
+	}
 }
 
 int	is_special(char c)

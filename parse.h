@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 18:56:03 by mkarim            #+#    #+#             */
-/*   Updated: 2022/07/06 09:13:36 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/06 11:35:38 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ typedef struct	s_files {
 }			t_files;
 
 size_t	ft_strlen(char *s);
-void	ft_putstr(char *s);
-void	ft_putendl(char *s);
+void	ft_putstr_fd(char *s, int fd);
+void	ft_putendl_fd(char *s, int fd);
 
 typedef struct s_cmdl {
 	char	*cmd;
@@ -86,7 +86,7 @@ char	*ft_substr(char *s, unsigned int start, size_t len);
 char	*ft_strtrim(char *s1, char *set);
 size_t	ft_strlcpy(char *dst, char *src, size_t size);
 int	ft_isspace(int c);
-void	ft_token(t_token *token, t_data *data, char *s);
+t_token	*ft_token(t_token *token, t_data *data, char *s);
 char	**ft_split(char *s, char c);
 int	ft_strcmp(char *s1, char *s2);
 int    ft_check_syntax(char *s);
@@ -95,5 +95,7 @@ int	ft_isalnum(int c);
 char	*ft_strcat(char *dest, char *src);
 int	is_special(char c);
 void	remove_quotes(t_token *token);
+void	incr_quotes(char c, int *a, int *b);
+void	print_token(t_token *token);
 
 #endif
